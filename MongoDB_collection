@@ -57,15 +57,6 @@ Aadarsh> db.student.getIndexes()
   { v: 2, key: { name: 1 }, name: 'name_1' },
   { v: 2, key: { name: 1, language: -1 }, name: 'name_1_language_-1' }
 ]
-Aadarsh> db.student.find.sort({name:1})
-TypeError: db.student.find.sort is not a function
-Aadarsh> db.student.find.()sort({name:1})
-Uncaught:
-SyntaxError: Unexpected token (1:16)
-
-> 1 | db.student.find.()sort({name:1})
-    |                 ^
-  2 |
 
 Aadarsh> db.student.find().sort({name:1})
 [
@@ -86,13 +77,6 @@ Aadarsh> db.student.find().sort({name:1})
   },
   { _id: ObjectId("6360d8fc76d0e0c11300d27e"), id: 1, name: 'santosh' }
 ]
-Aadarsh> db.student.find.()sort({name:-1})
-Uncaught:
-SyntaxError: Unexpected token (1:16)
-
-> 1 | db.student.find.()sort({name:-1})
-    |                 ^
-  2 |
 
 Aadarsh> db.student.find().sort({name:-1})
 [

@@ -1,0 +1,118 @@
+test> show dbs
+Aadarsh   56.00 KiB
+admin     40.00 KiB
+config   108.00 KiB
+local     72.00 KiB
+test> use Aadarsh
+switched to db Aadarsh
+Aadarsh> show collections
+friends
+student
+Students
+Aadarsh> db.student.insertOne({"name":"Aryan","language":"java"})
+{
+  acknowledged: true,
+  insertedId: ObjectId("6360dd1b0ff0a38899b83edb")
+}
+Aadarsh> db.student.insertOne({"name":"Aadarsh","language":"C++"})
+{
+  acknowledged: true,
+  insertedId: ObjectId("6360dd2e0ff0a38899b83edc")
+}
+Aadarsh> db.student.insertOne({"name":"Nilesh","language":"Python"})
+{
+  acknowledged: true,
+  insertedId: ObjectId("6360dd3f0ff0a38899b83edd")
+}
+Aadarsh> db.student.find().pretty()
+[
+  { _id: ObjectId("6360d8fc76d0e0c11300d27e"), id: 1, name: 'santosh' },
+  {
+    _id: ObjectId("6360dd1b0ff0a38899b83edb"),
+    name: 'Aryan',
+    language: 'java'
+  },
+  {
+    _id: ObjectId("6360dd2e0ff0a38899b83edc"),
+    name: 'Aadarsh',
+    language: 'C++'
+  },
+  {
+    _id: ObjectId("6360dd3f0ff0a38899b83edd"),
+    name: 'Nilesh',
+    language: 'Python'
+  }
+]
+Aadarsh> db.student.createIndex({name:1})
+name_1
+Aadarsh> db.student.createIndex({language:-1})
+language_-1
+Aadarsh> db.student.createIndex({name:1,language:-1})
+name_1_language_-1
+Aadarsh> db.student.dropIndex({language:-1})
+{ nIndexesWas: 4, ok: 1 }
+Aadarsh> db.student.getIndexes()
+[
+  { v: 2, key: { _id: 1 }, name: '_id_' },
+  { v: 2, key: { name: 1 }, name: 'name_1' },
+  { v: 2, key: { name: 1, language: -1 }, name: 'name_1_language_-1' }
+]
+Aadarsh> db.student.find.sort({name:1})
+TypeError: db.student.find.sort is not a function
+Aadarsh> db.student.find.()sort({name:1})
+Uncaught:
+SyntaxError: Unexpected token (1:16)
+
+> 1 | db.student.find.()sort({name:1})
+    |                 ^
+  2 |
+
+Aadarsh> db.student.find().sort({name:1})
+[
+  {
+    _id: ObjectId("6360dd2e0ff0a38899b83edc"),
+    name: 'Aadarsh',
+    language: 'C++'
+  },
+  {
+    _id: ObjectId("6360dd1b0ff0a38899b83edb"),
+    name: 'Aryan',
+    language: 'java'
+  },
+  {
+    _id: ObjectId("6360dd3f0ff0a38899b83edd"),
+    name: 'Nilesh',
+    language: 'Python'
+  },
+  { _id: ObjectId("6360d8fc76d0e0c11300d27e"), id: 1, name: 'santosh' }
+]
+Aadarsh> db.student.find.()sort({name:-1})
+Uncaught:
+SyntaxError: Unexpected token (1:16)
+
+> 1 | db.student.find.()sort({name:-1})
+    |                 ^
+  2 |
+
+Aadarsh> db.student.find().sort({name:-1})
+[
+  { _id: ObjectId("6360d8fc76d0e0c11300d27e"), id: 1, name: 'santosh' },
+  {
+    _id: ObjectId("6360dd3f0ff0a38899b83edd"),
+    name: 'Nilesh',
+    language: 'Python'
+  },
+  {
+    _id: ObjectId("6360dd1b0ff0a38899b83edb"),
+    name: 'Aryan',
+    language: 'java'
+  },
+  {
+    _id: ObjectId("6360dd2e0ff0a38899b83edc"),
+    name: 'Aadarsh',
+    language: 'C++'
+  }
+]
+Aadarsh>
+
+
